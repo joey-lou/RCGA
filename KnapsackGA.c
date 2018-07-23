@@ -11,33 +11,33 @@ const int SIZE = 20;						// length of the sequences(number of packages)
 const float CO_PROB = 0.85;					// crossover probability
 const float MU_PROB = 0.05;					// mutation probability
 const int ITER = 100;						// iteration(generation) number
-const int SEED = 9;							// seed number to randomly generate samples
-const float KEEP_PERCENT = 0.8;				// the percentange of whole population that gets updated
-const int NUM_KEEP = PPL_SIZE*KEEP_PERCENT;	// number of individuals kept from generation to generation
-const int NUM_UPDATE = PPL_SIZE-NUM_KEEP;	// number of individuals updated
+const int SEED = 9;						// seed number to randomly generate samples
+const float KEEP_PERCENT = 0.8;					// the percentange of whole population that gets updated
+const int NUM_KEEP = PPL_SIZE*KEEP_PERCENT;			// number of individuals kept from generation to generation
+const int NUM_UPDATE = PPL_SIZE-NUM_KEEP;			// number of individuals updated
 
 /* global variables */
-int population[PPL_SIZE][SIZE];				// 2D population representation
+int population[PPL_SIZE][SIZE];					// 2D population representation
 int ppl_scores[PPL_SIZE];					// scores of population
 int ppl_weights[PPL_SIZE];					// weights of population
-int parent1;								// index of parent1
-int parent2;								// index of parent2
+int parent1;							// index of parent1
+int parent2;							// index of parent2
 int total_index[PPL_SIZE];					// include all indices, may or may not be sorted
 int keep_index[NUM_KEEP];					// indices of those we keep
-int update_index[NUM_UPDATE];				// indices of those we discard/ update
-int scores[SIZE];							// scores of all available packages
-int weights[SIZE];							// weights of all available packages
+int update_index[NUM_UPDATE];					// indices of those we discard/ update
+int scores[SIZE];						// scores of all available packages
+int weights[SIZE];						// weights of all available packages
 
 
 /* list of helper functions */
-int sum(int *arr, int size, int *index_arr); // take sum of given integer array entries 
-int max(int *arr, int size);				// simple max finding
+int sum(int *arr, int size, int *index_arr); 			// take sum of given integer array entries 
+int max(int *arr, int size);					// simple max finding
 int weightcal(int i);						// calculate weight of ith sequence(individual)
 int scorecal(int i);						// calculate score of ith sequence
-void update(int i, int MAX_WEIGHT);			// update overweighted sequences by randomly deleting 1s in array
+void update(int i, int MAX_WEIGHT);				// update overweighted sequences by randomly deleting 1s in array
 float homogeneitycal(void);					// find the percentage of max scored individuals in population
 void sort_index(void);						// sort indices of total_index according to ppl_scores
-int roulette(void);							// roulette selection method
+int roulette(void);						// roulette selection method
 void crossover(int index);					// perform crossover and replace the indexed individual with new sequence
 void mutate(int index);						// mutate the indexed individual
 void updateparent(void);					// update the indices to two parents using roullete
@@ -45,8 +45,8 @@ void updateindices(void);					// update the indices of all 3 index arrays
 float randomgen(float min, float max);
 
 /* visualization functions */
-void printarray(int *arr,int n);			// print a 1D array, sperated by periods
-void print_pplarray(int index);				// print the indexed individual in population (in binary)
+void printarray(int *arr,int n);				// print a 1D array, sperated by periods
+void print_pplarray(int index);					// print the indexed individual in population (in binary)
 
 int main(void){
 	/* randomized sample data */
@@ -81,7 +81,7 @@ int main(void){
 		ppl_weights[i] = weightcal(i);
 		ppl_scores[i] = scorecal(i);
 		while (ppl_weights[i] > MAX_WEIGHT){ 
-			update(i,MAX_WEIGHT);  					// update overweighted sequences
+			update(i,MAX_WEIGHT);  				// update overweighted sequences
 		}
 	}
 	
@@ -98,9 +98,9 @@ int main(void){
 			//print_pplarray(i);
 			ppl_weights[update_index[i]] = weightcal(update_index[i]);
 			ppl_scores[update_index[i]] = scorecal(update_index[i]);
-			while (ppl_weights[update_index[i]] > MAX_WEIGHT){ 	// in case new individuals are overweighted
+			while (ppl_weights[update_index[i]] > MAX_WEIGHT){ 	
+				// in case new individuals are overweighted
 				update(update_index[i],MAX_WEIGHT);
-				//printf("[%i] is updated\n", i);
 			}
 		}
 		printarray(ppl_scores,PPL_SIZE);
