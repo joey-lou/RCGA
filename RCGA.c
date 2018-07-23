@@ -30,16 +30,16 @@ const int VAR_SIZE = 3;							// number of variables
 const float CO_PROB = 0.8;						// crossover probability
 const float MU_PROB = 0.1;						// mutation probability
 const int ITER = 100;							// iteration number
-const float TOUR_PERCENT = 0.17;				// percentage of population enters tournaments
-const int TOUR_SIZE = TOUR_PERCENT*PPL_SIZE;	// number of individuals enter tournaments
+const float TOUR_PERCENT = 0.17;					// percentage of population enters tournaments
+const int TOUR_SIZE = TOUR_PERCENT*PPL_SIZE;				// number of individuals enter tournaments
 const float P = 10; 							// power of mutation
 const float uplimit = 1.0;
 const float lowlimit = -1.0;
 #define PI 3.14159265358979
 
 /* global variables */
-float n_gen[PPL_SIZE][VAR_SIZE];				// new generation 2D array
-float o_gen[PPL_SIZE][VAR_SIZE];				// old generation 2D array
+float n_gen[PPL_SIZE][VAR_SIZE];					// new generation 2D array
+float o_gen[PPL_SIZE][VAR_SIZE];					// old generation 2D array
 float ngen_value[PPL_SIZE];						// function values of new generation
 float ogen_value[PPL_SIZE];						// function values of old generation
 int parent1, parent2;							// parents selected from old generation
@@ -51,23 +51,23 @@ int total_idx[PPL_SIZE];
 /* helper function list */
 float sum(float *arr, int size);				// returns sum of given array
 int max(float *arr, int size);					// returns index of max in array
-int min(float *arr, int size, int *idx_arr);	// return minimum from indexed individuals in new gen
+int min(float *arr, int size, int *idx_arr);			// return minimum from indexed individuals in new gen
 int fit(int idx, int entry);					// check if indexed individual fits constraints
 float feval(int idx, int fchoice);				// evaluate function value for indexed individual
-float penval(int idx);							// evaluate penalty added to indexed individual
-void copygen(void);								// copy new genration to old generation
-void updatetour(void);							// update indices in tournament
+float penval(int idx);						// evaluate penalty added to indexed individual
+void copygen(void);						// copy new genration to old generation
+void updatetour(void);						// update indices in tournament
 int roulette(void);
 float homogeneitycal(void);
 float randomgen(float minimum, float maximum);
 /* crossover methods */
-void laplacex(float a, float b, int idx);		// laplace crossover
+void laplacex(float a, float b, int idx);			// laplace crossover
 void BLX_alpha(float alpha, int idx);
 void arithmcross(int idx, float alpha);
 
 /* mutation methods */
 void uniformutate(int idx, float delta);
-void powermutate(int idx);						// mutate indexed individual in new gen
+void powermutate(int idx);					// mutate indexed individual in new gen
 
 
 /* visualization tools */
@@ -412,7 +412,6 @@ float homogeneitycal(void){
 	for (int i=0;i<PPL_SIZE;i++){
 		if (fabs(ngen_value[i]-ngen_value[minimum])<1e-8){
 			repeat ++;
-			//printf("[%i] [%f] [%f] [%o]\n",i,ngen_value[i]-ngen_value[minimum],1e-8,abs(ngen_value[i]-ngen_value[minimum])<1e-8);
 		}
 	}
 	return repeat/float(PPL_SIZE);
