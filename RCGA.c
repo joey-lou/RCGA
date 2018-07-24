@@ -2,7 +2,7 @@
 Jiujiu Lou, 06/28/2018
 
 Objective function:
-min f(x1,x2,x3) = x1^2+x2^2+(x3-2.5)^2
+min f(x1,x2,x3) = x1^2+x2^2+x3^2
 x1 in [-1,1]
 x2 in [-1,1]
 x3 in [-1,1]
